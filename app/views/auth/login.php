@@ -11,69 +11,71 @@ $old = $session->flashdata('old') ?? [];
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #ffe6f0; /* light pink background */
+      background: #ffe6f0;
       color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      animation: bgPulse 6s infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { background-color: #ffe6f0; }
+      50% { background-color: #ffd1e3; }
+      100% { background-color: #ffe6f0; }
     }
 
     .container {
       width: 100%;
       max-width: 400px;
-      background: #ffccdd; /* pink card */
+      background: #ffccdd;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(216,27,96,0.25);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .container h1 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       font-size: 2rem;
-      color: #d81b60; /* dark pink */
+      color: #d81b60;
     }
 
     .container p {
       text-align: center;
-      margin-bottom: 25px;
-      color: #800040;
-      font-size: 0.95rem;
-    }
-
-    .container h2 {
-      text-align: center;
       margin-bottom: 20px;
-      color: #c2185b;
+      color: #880e4f;
+      font-size: 0.95rem;
     }
 
     .flash {
       padding: 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 15px;
+      text-align: center;
+      font-weight: 600;
     }
     .success { background: #f8bbd0; color: #880e4f; }
     .error { background: #f48fb1; color: #b71c1c; }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+    form { display: flex; flex-direction: column; gap: 15px; }
 
     label {
       font-weight: 600;
       margin-bottom: 5px;
-      display: block;
       color: #880e4f;
     }
 
@@ -81,43 +83,39 @@ $old = $session->flashdata('old') ?? [];
       width: 100%;
       padding: 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1rem;
+      transition: 0.3s;
     }
 
     input {
       background: #ffd6e8;
       color: #880e4f;
-      outline: none;
-      transition: 0.3s;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
     }
 
     input:focus {
-      box-shadow: 0 0 0 2px #d81b60;
+      box-shadow: 0 0 0 3px #d81b60;
+      outline: none;
+      transform: scale(1.02);
     }
 
     button {
-      background: #d81b60;
+      background: linear-gradient(135deg, #d81b60, #f06292);
       color: #fff;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(216,27,96,0.3);
     }
 
     button:hover {
-      background: #ad1457;
+      background: linear-gradient(135deg, #f06292, #d81b60);
+      transform: translateY(-2px) scale(1.02);
     }
 
     button:focus {
-      box-shadow: 0 0 0 2px #d81b60;
+      box-shadow: 0 0 0 3px #d81b60;
       outline: none;
-    }
-
-    .container p.footer {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #880e4f;
-      text-align: center;
     }
 
     .container a {
@@ -126,12 +124,8 @@ $old = $session->flashdata('old') ?? [];
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 20px;
-      }
-      .container h1 {
-        font-size: 1.6rem;
-      }
+      .container { padding: 20px; }
+      .container h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -141,17 +135,11 @@ $old = $session->flashdata('old') ?? [];
     <h1>STUDENT LIST</h1>
     <p>Manage and view all registered students</p>
 
-    <h2>🔐 Login</h2>
-
     <?php if ($session->flashdata('success')): ?>
-      <div class="flash success">
-        <?= htmlspecialchars($session->flashdata('success')) ?>
-      </div>
+      <div class="flash success"><?= htmlspecialchars($session->flashdata('success')) ?></div>
     <?php endif; ?>
     <?php if ($session->flashdata('error')): ?>
-      <div class="flash error">
-        <?= htmlspecialchars($session->flashdata('error')) ?>
-      </div>
+      <div class="flash error"><?= htmlspecialchars($session->flashdata('error')) ?></div>
     <?php endif; ?>
 
     <form method="post" action="/auth/login">
@@ -168,7 +156,7 @@ $old = $session->flashdata('old') ?? [];
       <button type="submit">Login</button>
     </form>
 
-    <p class="footer">No account? <a href="/auth/register">Register here</a></p>
+    <p style="text-align:center; margin-top:15px;">No account? <a href="/auth/register">Register here</a></p>
   </div>
 
 </body>

@@ -13,8 +13,8 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #0d0d2b;
-      color: #fff;
+      background: #ffe6f0;
+      color: #880e4f;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -25,33 +25,35 @@
     .container {
       width: 100%;
       max-width: 1100px;
-      background: #1e1e2f;
+      background: #ffccdd;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(216,27,96,0.25);
     }
 
-    .container h2 {
+    h2 {
       text-align: center;
       margin-bottom: 10px;
       font-size: 2rem;
+      color: #d81b60;
     }
 
-    .container p.sub {
+    p.sub {
       text-align: center;
       margin-bottom: 25px;
-      color: #bbb;
+      color: #880e4f;
       font-size: 0.95rem;
     }
 
     .flash {
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 15px;
-      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
     }
-    .success { background: #2e7d32; color: #fff; }
-    .error { background: #c62828; color: #fff; }
+    .success { background: #f8bbd0; color: #880e4f; }
+    .error { background: #f48fb1; color: #b71c1c; }
 
     .top-bar {
       display: flex;
@@ -63,112 +65,79 @@
     }
 
     .btn {
-      background: #6c63ff;
+      background: linear-gradient(135deg, #d81b60, #f06292);
       color: #fff;
       padding: 8px 14px;
-      border-radius: 8px;
+      border-radius: 12px;
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 600;
-      display: inline-block;
       transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(216,27,96,0.3);
     }
-    .btn:hover { background: #5750d3; }
-    .btn.logout { background: #c62828; }
-    .btn.logout:hover { background: #a82222; }
-    .btn.secondary { background: #444; }
-    .btn.danger { background: #d32f2f; }
-    .btn.restore { background: #2e7d32; }
+    .btn:hover { 
+      background: linear-gradient(135deg, #f06292, #d81b60);
+      transform: translateY(-2px) scale(1.02);
+    }
+    .btn.logout { background: #f48fb1; }
+    .btn.logout:hover { background: #d81b60; }
+    .btn.secondary { background: #ffd6e8; color: #880e4f; }
+    .btn.secondary:hover { background: #ffb6c1; }
 
     .search-bar input {
       padding: 10px 12px;
       border: none;
-      border-radius: 8px;
-      background: #2a2a40;
-      color: #fff;
+      border-radius: 12px;
+      background: #ffd6e8;
+      color: #880e4f;
       outline: none;
       width: 220px;
       font-size: 0.95rem;
       transition: 0.3s;
     }
     .search-bar input:focus {
-      box-shadow: 0 0 0 2px #6c63ff;
+      box-shadow: 0 0 0 3px #d81b60;
+      transform: scale(1.02);
     }
 
-    .list {
+    table.list {
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
     }
-
-    .list thead {
-      background: #2a2a40;
+    table.list thead {
+      background: #ffb6c1;
     }
-    .list th, .list td {
+    table.list th, table.list td {
       padding: 12px 15px;
       text-align: left;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #ff99bb;
     }
-    .list th {
+    table.list th {
       font-weight: 700;
-      color: #ddd;
+      color: #880e4f;
       text-transform: uppercase;
       font-size: 0.85rem;
     }
-    .list td {
+    table.list td {
       font-size: 0.95rem;
+      color: #880e4f;
     }
 
-    .list img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
+    .actions-col { white-space: nowrap; }
 
-    .actions-col {
-      white-space: nowrap;
-    }
-
-    .pagination {
-      margin-top: 25px;
-      text-align: center;
-    }
-    .pagination ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: inline-flex;
-      gap: 8px;
-    }
-    .pagination a {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 8px;
-      background: #2a2a40;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .pagination a:hover { background: #6c63ff; }
-
-    footer {
-      margin-top: 25px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #777;
+    @media (max-width: 480px) {
+      .container { padding: 20px; }
+      h2 { font-size: 1.6rem; }
+      .search-bar input { width: 100%; margin-top: 10px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>👥 Students List</h2>
+    <h2>Students List</h2>
     <p class="sub">Manage and view all registered students</p>
 
-    <!-- FLASH -->
     <?php if ($session->flashdata('success')): ?>
       <div class="flash success"><?= htmlspecialchars($session->flashdata('success')) ?></div>
     <?php endif; ?>
@@ -176,11 +145,10 @@
       <div class="flash error"><?= htmlspecialchars($session->flashdata('error')) ?></div>
     <?php endif; ?>
 
-    <!-- TOP BAR -->
     <div class="top-bar">
       <div class="actions">
-        <a class="btn" href="/students/create">➕ Add New</a>
-        <a class="btn logout" href="/auth/logout">🚪 Logout</a>
+        <a class="btn" href="/students/create">Add New</a>
+        <a class="btn logout" href="/auth/logout">Logout</a>
         <?php if (!empty($show_deleted)): ?>
           <a class="btn secondary" href="/students/get-all">Show Active</a>
         <?php else: ?>
@@ -194,18 +162,16 @@
             <input type="hidden" name="show" value="deleted">
           <?php endif; ?>
           <input type="text" name="search" placeholder="Search students..." value="<?= htmlspecialchars($search ?? '') ?>">
-          <button type="submit" class="btn">🔍 Search</button>
+          <button type="submit" class="btn">Search</button>
         </form>
       </div>
     </div>
 
-    <!-- STUDENTS TABLE -->
     <?php if (!empty($records)): ?>
       <table class="list">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Photo</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -216,20 +182,16 @@
           <?php foreach ($records as $r): ?>
             <tr>
               <td><?= htmlspecialchars($r['id']) ?></td>
-              <td>
-                <img src="<?= !empty($r['photo']) ? BASE_URL.'public/uploads/'.htmlspecialchars($r['photo']) : 'https://via.placeholder.com/40' ?>" 
-                     alt="Photo of <?= htmlspecialchars($r['first_name']) ?>">
-              </td>
               <td><?= htmlspecialchars($r['first_name']) ?></td>
               <td><?= htmlspecialchars($r['last_name']) ?></td>
               <td><?= htmlspecialchars($r['email']) ?></td>
               <td class="actions-col">
                 <?php if (empty($show_deleted)): ?>
-                  <a class="btn" href="/students/update/<?= $r['id'] ?>">✏️ Edit</a>
-                  <a class="btn danger" href="/students/delete/<?= $r['id'] ?>" onclick="return confirm('Delete this student?')">🗑️ Delete</a>
+                  <a class="btn" href="/students/update/<?= $r['id'] ?>">Edit</a>
+                  <a class="btn secondary" href="/students/delete/<?= $r['id'] ?>" onclick="return confirm('Delete this student?')">Delete</a>
                 <?php else: ?>
-                  <a class="btn restore" href="/students/restore/<?= $r['id'] ?>">♻ Restore</a>
-                  <a class="btn danger" href="/students/hard_delete/<?= $r['id'] ?>" onclick="return confirm('Permanently delete?')">❌ Hard Delete</a>
+                  <a class="btn" href="/students/restore/<?= $r['id'] ?>">Restore</a>
+                  <a class="btn secondary" href="/students/hard_delete/<?= $r['id'] ?>" onclick="return confirm('Permanently delete?')">Hard Delete</a>
                 <?php endif; ?>
               </td>
             </tr>
@@ -239,23 +201,6 @@
     <?php else: ?>
       <p style="text-align:center; margin-top:20px;">No students found.</p>
     <?php endif; ?>
-
-    <!-- PAGINATION -->
-    <div class="pagination">
-      <?php
-        if (!empty($pagination_links)) {
-          echo "<ul>" . str_replace(
-              ['<ul>', '</ul>', '<li>', '</li>'],
-              ['', '', '<li>', '</li>'], 
-              $pagination_links
-          ) . "</ul>";
-        }
-      ?>
-    </div>
-
-    <footer>
-      © <?= date("Y") ?> Student List System
-    </footer>
   </div>
 </body>
 </html>

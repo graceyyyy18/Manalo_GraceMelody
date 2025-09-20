@@ -11,8 +11,8 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #0d0d2b;
-      color: #fff;
+      background: #ffe6f0;
+      color: #880e4f;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -23,32 +23,41 @@
     .container {
       width: 100%;
       max-width: 450px;
-      background: #1e1e2f;
+      background: #ffccdd;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(216,27,96,0.25);
       text-align: center;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     h2 {
       margin-bottom: 10px;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      color: #d81b60;
     }
 
     .welcome {
       font-size: 1.2rem;
       font-weight: 600;
-      color: #fff;
       margin-bottom: 20px;
+      color: #880e4f;
     }
 
     .flash {
-      padding: 10px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 10px;
       margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
     }
-    .success { background: #2e7d32; color: #fff; }
-    .error { background: #c62828; color: #fff; }
+    .success { background: #f8bbd0; color: #880e4f; }
+    .error { background: #f48fb1; color: #b71c1c; }
 
     .actions {
       display: flex;
@@ -60,66 +69,47 @@
     .btn {
       display: block;
       padding: 12px;
-      border-radius: 8px;
-      background: #6c63ff;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #d81b60, #f06292);
       color: #fff;
       font-weight: 600;
       text-decoration: none;
       transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(216,27,96,0.3);
     }
-
     .btn:hover {
-      background: #5750d3;
+      background: linear-gradient(135deg, #f06292, #d81b60);
+      transform: translateY(-2px) scale(1.02);
     }
 
     .logout {
-      background: #c62828;
+      background: #f48fb1;
     }
-
     .logout:hover {
-      background: #a61d1d;
-    }
-
-    footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
+      background: #d81b60;
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 20px;
-      }
-      h2 {
-        font-size: 1.6rem;
-      }
+      .container { padding: 20px; }
+      h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h2>🏠 Dashboard</h2>
-    <p class="welcome">
-      Welcome 👋
-    </p>
+    <h2>User Dashboard</h2>
+    <p class="welcome">Welcome!</p>
 
     <?php if ($session->flashdata('success')): ?>
       <div class="flash success"><?= htmlspecialchars($session->flashdata('success')) ?></div>
     <?php endif; ?>
 
     <div class="actions">
-      <a class="btn" href="/user/profile">👤 Profile</a>
-      <a class="btn logout" href="/auth/logout">🚪 Logout</a>
+      <a class="btn" href="/user/profile">Profile</a>
+      <a class="btn logout" href="/auth/logout">Logout</a>
     </div>
   </div>
-
-  <footer>
-    © <?= date("Y") ?> Student List System
-  </footer>
 
 </body>
 </html>

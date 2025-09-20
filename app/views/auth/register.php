@@ -23,20 +23,28 @@ $old = $session->flashdata('old') ?? [];
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      animation: bgPulse 6s infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { background-color: #ffe6f0; }
+      50% { background-color: #ffd1e3; }
+      100% { background-color: #ffe6f0; }
     }
 
     .container {
       width: 100%;
       max-width: 420px;
-      background: #ffd6e8;
+      background: #ffccdd;
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(216,27,96,0.25);
-      transition: transform 0.3s;
+      animation: slideUp 0.5s ease-out;
     }
 
-    .container:hover {
-      transform: translateY(-3px);
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .container h2 {
@@ -82,6 +90,7 @@ $old = $session->flashdata('old') ?? [];
     input:focus, select:focus {
       box-shadow: 0 0 0 3px #d81b60;
       outline: none;
+      transform: scale(1.02);
     }
 
     button {
@@ -94,7 +103,7 @@ $old = $session->flashdata('old') ?? [];
 
     button:hover {
       background: linear-gradient(135deg, #f06292, #d81b60);
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.02);
     }
 
     button:focus { box-shadow: 0 0 0 3px #d81b60; outline: none; }
@@ -117,7 +126,7 @@ $old = $session->flashdata('old') ?? [];
 <body>
 
   <div class="container">
-    <h2>📝 Register</h2>
+    <h2>Register</h2>
 
     <?php if ($session->flashdata('success')): ?>
       <div class="flash success"><?= htmlspecialchars($session->flashdata('success')) ?></div>
@@ -150,11 +159,6 @@ $old = $session->flashdata('old') ?? [];
       <div>
         <label>Confirm Password</label>
         <input type="password" name="confirm_password" required>
-      </div>
-
-      <div>
-        <label>Photo</label>
-        <input type="file" name="photo" accept="image/*">
       </div>
 
       <div>

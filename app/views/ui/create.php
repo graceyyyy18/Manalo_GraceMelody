@@ -13,22 +13,35 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #0d0d2b;
-      color: #fff;
+      background: #ffe6f0;
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       min-height: 100vh;
       padding: 30px;
+      animation: bgPulse 6s infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { background-color: #ffe6f0; }
+      50% { background-color: #ffd1e3; }
+      100% { background-color: #ffe6f0; }
     }
 
     .container {
       width: 100%;
       max-width: 500px;
-      background: #1e1e2f;
+      background: #ffccdd;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(216,27,96,0.25);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .top-actions {
@@ -38,11 +51,11 @@
     }
 
     .back-btn {
-      background: #444;
+      background: #d81b60;
       color: #fff;
       padding: 8px 14px;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 0.9rem;
       font-weight: 500;
       text-decoration: none;
@@ -50,30 +63,32 @@
     }
 
     .back-btn:hover {
-      background: #666;
+      background: #ad1457;
     }
 
-    .container h2 {
+    h2 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       font-size: 1.8rem;
+      color: #d81b60;
     }
 
-    .container p.sub {
+    p.sub {
       text-align: center;
       margin-bottom: 25px;
-      color: #bbb;
+      color: #880e4f;
       font-size: 0.95rem;
     }
 
     .flash {
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 15px;
-      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
     }
-    .success { background: #2e7d32; color: #fff; }
-    .error { background: #c62828; color: #fff; }
+    .success { background: #f8bbd0; color: #880e4f; }
+    .error { background: #f48fb1; color: #b71c1c; }
 
     form {
       display: flex;
@@ -86,63 +101,66 @@
       margin-bottom: 5px;
       display: block;
       font-size: 0.95rem;
+      color: #880e4f;
     }
 
     input, select {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 12px;
       border: none;
       outline: none;
-      background: #2a2a40;
-      color: #fff;
+      background: #ffd6e8;
+      color: #880e4f;
       font-size: 0.95rem;
       transition: 0.3s;
     }
 
     input:focus, select:focus {
-      box-shadow: 0 0 0 2px #6c63ff;
+      box-shadow: 0 0 0 3px #d81b60;
+      outline: none;
+      transform: scale(1.02);
     }
 
     input[type="file"] {
       padding: 8px;
-      background: #2a2a40;
       cursor: pointer;
     }
 
     button {
-      background: #6c63ff;
+      background: linear-gradient(135deg, #d81b60, #f06292);
       color: #fff;
       padding: 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 5px 15px rgba(216,27,96,0.3);
       transition: 0.3s;
     }
 
     button:hover {
-      background: #5750d3;
+      background: linear-gradient(135deg, #f06292, #d81b60);
+      transform: translateY(-2px) scale(1.02);
     }
 
-    footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #777;
+    button:focus { box-shadow: 0 0 0 3px #d81b60; outline: none; }
+
+    @media (max-width: 480px) {
+      .container { padding: 20px; }
+      h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- Back button -->
     <div class="top-actions">
       <a href="/students" class="back-btn">⬅ Back to List</a>
     </div>
 
-    <h2>➕ Add Student</h2>
+    <h2>Add Student</h2>
     <p class="sub">Fill out the form below to register a new student</p>
 
     <?php if ($session->flashdata('success')): ?>
@@ -174,11 +192,6 @@
       </div>
 
       <div>
-        <label>Photo</label>
-        <input type="file" name="photo" accept="image/*">
-      </div>
-
-      <div>
         <label>Role</label>
         <select name="role" required>
           <option value="user" selected>User</option>
@@ -186,12 +199,9 @@
         </select>
       </div>
 
-      <button type="submit">💾 Save Student</button>
+      <button type="submit">Save Student</button>
     </form>
 
-    <footer>
-      © <?= date("Y") ?> Student List System
-    </footer>
   </div>
 </body>
 </html>
