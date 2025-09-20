@@ -126,6 +126,32 @@
 
     .actions-col { white-space: nowrap; }
 
+    .pagination {
+      margin-top: 25px;
+      text-align: center;
+    }
+    .pagination ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: inline-flex;
+      gap: 8px;
+    }
+    .pagination a {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: #ffd6e8;
+      color: #880e4f;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .pagination a:hover { 
+      background: linear-gradient(135deg, #d81b60, #f06292);
+      color: #fff;
+    }
+
     @media (max-width: 480px) {
       .container { padding: 20px; }
       h2 { font-size: 1.6rem; }
@@ -198,6 +224,18 @@
           <?php endforeach; ?>
         </tbody>
       </table>
+
+      <div class="pagination">
+        <?php
+          if (!empty($pagination_links)) {
+            echo "<ul>" . str_replace(
+                ['<ul>', '</ul>', '<li>', '</li>'],
+                ['', '', '<li>', '</li>'], 
+                $pagination_links
+            ) . "</ul>";
+          }
+        ?>
+      </div>
     <?php else: ?>
       <p style="text-align:center; margin-top:20px;">No students found.</p>
     <?php endif; ?>
