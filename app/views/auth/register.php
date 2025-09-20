@@ -11,15 +11,13 @@ $old = $session->flashdata('old') ?? [];
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #0d0d2b;
-      color: #fff;
+      background: #ffe6f0;
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,103 +28,89 @@ $old = $session->flashdata('old') ?? [];
     .container {
       width: 100%;
       max-width: 420px;
-      background: #1e1e2f;
+      background: #ffd6e8;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(216,27,96,0.25);
+      transition: transform 0.3s;
+    }
+
+    .container:hover {
+      transform: translateY(-3px);
     }
 
     .container h2 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       font-size: 1.8rem;
+      color: #d81b60;
     }
 
     .flash {
       padding: 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 15px;
+      font-weight: 600;
+      text-align: center;
     }
-    .success { background: #2e7d32; color: #fff; }
-    .error { background: #c62828; color: #fff; }
+    .success { background: #f8bbd0; color: #880e4f; }
+    .error { background: #f48fb1; color: #b71c1c; }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+    form { display: flex; flex-direction: column; gap: 15px; }
 
     label {
       font-weight: 600;
       margin-bottom: 5px;
-      display: block;
+      color: #880e4f;
     }
 
     input, select, button {
       width: 100%;
       padding: 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1rem;
+      transition: 0.3s;
     }
 
     input, select {
-      background: #2a2a40;
-      color: #fff;
-      outline: none;
-      transition: 0.3s;
+      background: #ffd6e8;
+      color: #880e4f;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
     }
 
     input:focus, select:focus {
-      box-shadow: 0 0 0 2px #6c63ff;
+      box-shadow: 0 0 0 3px #d81b60;
+      outline: none;
     }
 
     button {
-      background: #6c63ff;
+      background: linear-gradient(135deg, #d81b60, #f06292);
       color: #fff;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(216,27,96,0.3);
     }
 
     button:hover {
-      background: #5750d3;
+      background: linear-gradient(135deg, #f06292, #d81b60);
+      transform: translateY(-2px);
     }
 
-    button:focus {
-      box-shadow: 0 0 0 2px #6c63ff;
-      outline: none;
-    }
+    button:focus { box-shadow: 0 0 0 3px #d81b60; outline: none; }
 
     p.footer {
       margin-top: 20px;
       font-size: 0.9rem;
-      color: #aaa;
+      color: #880e4f;
       text-align: center;
     }
 
-    p.footer a {
-      color: #6c63ff;
-      text-decoration: none;
-    }
+    p.footer a { color: #c2185b; text-decoration: none; }
 
-    footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
-    }
-
-    /* Responsive tweaks */
     @media (max-width: 480px) {
-      .container {
-        padding: 20px;
-      }
-      .container h2 {
-        font-size: 1.6rem;
-      }
+      .container { padding: 20px; }
+      .container h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -185,10 +169,6 @@ $old = $session->flashdata('old') ?? [];
 
     <p class="footer">Already have an account? <a href="/auth/login">Login</a></p>
   </div>
-
-  <footer>
-    © <?= date("Y") ?> Student List System
-  </footer>
 
 </body>
 </html>

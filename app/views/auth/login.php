@@ -18,8 +18,8 @@ $old = $session->flashdata('old') ?? [];
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #0d0d2b;
-      color: #fff;
+      background: #ffe6f0; /* light pink background */
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,28 +30,30 @@ $old = $session->flashdata('old') ?? [];
     .container {
       width: 100%;
       max-width: 400px;
-      background: #1e1e2f;
+      background: #ffccdd; /* pink card */
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
     .container h1 {
       text-align: center;
       margin-bottom: 10px;
       font-size: 2rem;
+      color: #d81b60; /* dark pink */
     }
 
     .container p {
       text-align: center;
       margin-bottom: 25px;
-      color: #bbb;
+      color: #800040;
       font-size: 0.95rem;
     }
 
     .container h2 {
       text-align: center;
       margin-bottom: 20px;
+      color: #c2185b;
     }
 
     .flash {
@@ -59,8 +61,8 @@ $old = $session->flashdata('old') ?? [];
       border-radius: 8px;
       margin-bottom: 15px;
     }
-    .success { background: #2e7d32; color: #fff; }
-    .error { background: #c62828; color: #fff; }
+    .success { background: #f8bbd0; color: #880e4f; }
+    .error { background: #f48fb1; color: #b71c1c; }
 
     form {
       display: flex;
@@ -72,6 +74,7 @@ $old = $session->flashdata('old') ?? [];
       font-weight: 600;
       margin-bottom: 5px;
       display: block;
+      color: #880e4f;
     }
 
     input, button {
@@ -83,18 +86,18 @@ $old = $session->flashdata('old') ?? [];
     }
 
     input {
-      background: #2a2a40;
-      color: #fff;
+      background: #ffd6e8;
+      color: #880e4f;
       outline: none;
       transition: 0.3s;
     }
 
     input:focus {
-      box-shadow: 0 0 0 2px #6c63ff;
+      box-shadow: 0 0 0 2px #d81b60;
     }
 
     button {
-      background: #6c63ff;
+      background: #d81b60;
       color: #fff;
       font-weight: 600;
       cursor: pointer;
@@ -102,33 +105,24 @@ $old = $session->flashdata('old') ?? [];
     }
 
     button:hover {
-      background: #5750d3;
+      background: #ad1457;
     }
 
     button:focus {
-      box-shadow: 0 0 0 2px #6c63ff;
+      box-shadow: 0 0 0 2px #d81b60;
       outline: none;
     }
 
     .container p.footer {
       margin-top: 20px;
       font-size: 0.9rem;
-      color: #aaa;
+      color: #880e4f;
       text-align: center;
     }
 
     .container a {
-      color: #6c63ff;
+      color: #c2185b;
       text-decoration: none;
-    }
-
-    footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
     }
 
     @media (max-width: 480px) {
@@ -176,10 +170,6 @@ $old = $session->flashdata('old') ?? [];
 
     <p class="footer">No account? <a href="/auth/register">Register here</a></p>
   </div>
-
-  <footer>
-    © <?= date("Y") ?> Student List System
-  </footer>
 
 </body>
 </html>
